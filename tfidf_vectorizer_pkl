@@ -1,0 +1,75 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNQ+r3ZHFiSbxHljAJJaWx3",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Rizki135196/ANALISIS-SENTIMEN-MUSLIM-PRO-INDONESIA/blob/main/tfidf_vectorizer_pkl\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "60da4414",
+        "outputId": "13d81a60-1204-41c0-a414-e3cdce9e85f9"
+      },
+      "source": [
+        "from sklearn.feature_extraction.text import TfidfVectorizer\n",
+        "from sklearn.svm import SVC\n",
+        "import pickle\n",
+        "\n",
+        "# Sample data (replace with your actual data)\n",
+        "documents = [\"This is the first document.\", \"This document is the second document.\", \"And this is the third one.\", \"Is this the first document?\"]\n",
+        "labels = [0, 1, 0, 1] # Sample labels\n",
+        "\n",
+        "# Create TF-IDF Vectorizer\n",
+        "tfidf = TfidfVectorizer()\n",
+        "X = tfidf.fit_transform(documents)\n",
+        "\n",
+        "# Create and train SVM model\n",
+        "svm_model = SVC(kernel='linear') # You can choose a different kernel\n",
+        "svm_model.fit(X, labels)\n",
+        "\n",
+        "# Save SVM model\n",
+        "pickle.dump(svm_model, open('svm_model.pkl', 'wb'))\n",
+        "\n",
+        "# Save TF-IDF Vectorizer\n",
+        "pickle.dump(tfidf, open('tfidf_vectorizer.pkl', 'wb'))\n",
+        "\n",
+        "print(\"SVM model and TF-IDF vectorizer saved successfully.\")"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "SVM model and TF-IDF vectorizer saved successfully.\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
